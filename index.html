@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24 Spokes Org | Syndicate to Serve!</title>
+    <meta name="description"
+        content="Empowering communities through education, health, and environmental stewardship. Join the 24 Spokes movement.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#000080',
+                        saffron: '#FF9933',
+                        indiaGreen: '#138808',
+                        darkGray: '#1a1a1a',
+                        lightGray: '#f4f4f4',
+                    },
+                    fontFamily: {
+                        sans: ['"Open Sans"', 'sans-serif'],
+                        header: ['"Oswald"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .btn-text,
+        .nav-link {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .menu-overlay {
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .menu-overlay.open {
+            transform: translateX(0);
+        }
+
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-darkGray antialiased">
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" onclick="switchPage('home'); return false;" class="flex items-center gap-3 group">
+                    <i
+                        class="fas fa-dharmachakra text-navy text-4xl group-hover:rotate-180 transition-transform duration-700"></i>
+                    <div class="flex flex-col">
+                        <span class="font-header font-bold text-2xl tracking-wide leading-none text-navy">24
+                            Spokes</span>
+                        <span class="font-sans text-[10px] tracking-widest text-saffron font-bold">SYNDICATE TO
+                            SERVE</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="switchPage('home')"
+                        class="nav-link text-sm font-bold tracking-widest hover:text-saffron transition-colors">Home</button>
+                    <button onclick="switchPage('about')"
+                        class="nav-link text-sm font-bold tracking-widest hover:text-saffron transition-colors">About</button>
+                    <button onclick="switchPage('volunteer')"
+                        class="nav-link bg-saffron text-white px-6 py-2 rounded-none font-bold tracking-widest hover:bg-navy transition-colors">Volunteer</button>
+                    <button onclick="switchPage('login')"
+                        class="nav-link text-sm font-bold tracking-widest hover:text-saffron transition-colors">
+                        <i class="fas fa-user-circle mr-1"></i> Login
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-2xl text-navy" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Full Screen Mobile Menu Overlay -->
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-navy z-[60] menu-overlay flex flex-col justify-center items-center text-white">
+        <button class="absolute top-6 right-6 text-4xl hover:text-saffron transition-colors" onclick="toggleMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="flex flex-col space-y-8 text-center">
+            <button onclick="switchPage('home'); toggleMenu()"
+                class="font-header text-4xl font-bold hover:text-saffron transition-colors">Home</button>
+            <button onclick="switchPage('about'); toggleMenu()"
+                class="font-header text-4xl font-bold hover:text-saffron transition-colors">About Us</button>
+            <button onclick="switchPage('volunteer'); toggleMenu()"
+                class="font-header text-4xl font-bold hover:text-saffron transition-colors">Volunteer</button>
+            <button onclick="switchPage('login'); toggleMenu()"
+                class="font-header text-4xl font-bold hover:text-saffron transition-colors">Login</button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="pt-20">
+
+        <!-- HOME VIEW -->
+        <div id="view-home" class="view-section active">
+
+            <!-- Hero Section -->
+            <section class="relative h-[90vh] flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+                        alt="Volunteers in Action"
+                        class="w-full h-full object-cover brightness-50 scale-105 hover:scale-100 transition-transform duration-[20s]">
+                </div>
+                <div class="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 reveal active leading-tight">
+                        We Show Up Because <br><span class="text-saffron">It Matters</span>
+                    </h1>
+                    <p class="font-sans text-lg md:text-xl font-light mb-8 reveal active delay-100 max-w-2xl mx-auto">
+                        Empowering communities through education, health, and environmental stewardship. Join the
+                        movement.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center reveal active delay-200">
+                        <button onclick="switchPage('volunteer')"
+                            class="bg-saffron text-white font-header font-bold text-lg px-10 py-4 uppercase tracking-wider hover:bg-white hover:text-navy transition-colors">
+                            Join the Syndicate
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Bar -->
+            <div class="bg-navy text-white py-12">
+                <div
+                    class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
+                    <div class="p-4 reveal">
+                        <div class="text-4xl font-header font-bold text-saffron mb-2">35/2020</div>
+                        <div class="text-xs tracking-widest opacity-80 uppercase">Registered Society</div>
+                    </div>
+                    <div class="p-4 reveal">
+                        <div class="text-4xl font-header font-bold text-saffron mb-2">3 Years</div>
+                        <div class="text-xs tracking-widest opacity-80 uppercase">Of Impact</div>
+                    </div>
+                    <div class="p-4 reveal">
+                        <div class="text-4xl font-header font-bold text-saffron mb-2">NITI Aayog</div>
+                        <div class="text-xs tracking-widest opacity-80 uppercase">Recognized NGO</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- What You Will Do Section -->
+            <section class="py-24 bg-lightGray">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-4xl md:text-5xl font-bold text-navy mb-4">What You Will Actually Do</h2>
+                        <div class="w-24 h-1 bg-saffron mx-auto"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 shadow-lg hover:shadow-xl transition-shadow card-hover reveal">
+                            <div class="h-48 mb-6 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-2xl font-bold text-navy mb-4">Guide & Mentor</h3>
+                            <p class="text-gray-600 mb-4">Support government school students through education drives
+                                and exam workshops.</p>
+                            <div class="w-12 h-1 bg-saffron"></div>
+                        </div>
+
+                        <div class="bg-white p-8 shadow-lg hover:shadow-xl transition-shadow card-hover reveal">
+                            <div class="h-48 mb-6 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-2xl font-bold text-navy mb-4">Empower Women</h3>
+                            <p class="text-gray-600 mb-4">Conduct self-defense workshops and legal awareness sessions
+                                for women.</p>
+                            <div class="w-12 h-1 bg-saffron"></div>
+                        </div>
+
+                        <div class="bg-white p-8 shadow-lg hover:shadow-xl transition-shadow card-hover reveal">
+                            <div class="h-48 mb-6 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-2xl font-bold text-navy mb-4">Save Lives</h3>
+                            <p class="text-gray-600 mb-4">Organize blood donation and organ pledge camps (100+ pledges
+                                collected).</p>
+                            <div class="w-12 h-1 bg-saffron"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quote Section -->
+            <section class="py-24 bg-white">
+                <div class="max-w-5xl mx-auto px-4 text-center reveal">
+                    <img src="https://images.unsplash.com/photo-1529390003860-de922f5d38e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                        class="w-32 h-32 rounded-full mx-auto mb-8 border-4 border-saffron object-cover">
+                    <h2 class="text-3xl md:text-4xl font-bold text-navy mb-6 leading-tight">
+                        "After six months of dedicated discussions and late-night brainstorming, we committed to
+                        transparency and accountability. The name '24 Spokes' symbolizes the 24 principles of life."
+                    </h2>
+                    <p class="font-header font-bold text-saffron tracking-widest uppercase">- The Founding Team</p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- ABOUT VIEW -->
+        <div id="view-about" class="view-section">
+            <!-- Header -->
+            <div class="bg-navy py-24 text-center text-white">
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 reveal active">Who We Are</h1>
+                <div class="w-24 h-1 bg-saffron mx-auto"></div>
+            </div>
+
+            <section class="max-w-7xl mx-auto px-4 py-24">
+                <div class="grid md:grid-cols-2 gap-16 items-center reveal">
+                    <div>
+                        <h2 class="text-4xl font-bold text-navy mb-6">Our Mission</h2>
+                        <p class="text-xl font-light text-gray-700 mb-8 leading-relaxed">
+                            "To unite passionate individuals in addressing societal challenges through education, health
+                            initiatives, environmental stewardship, and community engagement, fostering sustainable and
+                            inclusive development."
+                        </p>
+                        <h2 class="text-4xl font-bold text-navy mb-6">Our Vision</h2>
+                        <p class="text-xl font-light text-gray-700 leading-relaxed">
+                            "A society where every individual thrives with dignity, empowered through collective action
+                            and compassion."
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            class="rounded-lg shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1606092195730-5d7b9af1ef4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            class="rounded-lg shadow-lg mt-12">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Team Section -->
+            <section class="bg-lightGray py-24">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-16 reveal">
+                        <h2 class="text-4xl font-bold text-navy">Leadership Team</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white p-6 text-center card-hover reveal">
+                            <div class="w-32 h-32 mx-auto bg-gray-200 rounded-full mb-6 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-xl font-bold text-navy">Akhilesh Bonthu</h3>
+                            <p class="text-saffron font-bold text-sm tracking-widest uppercase mt-2">President</p>
+                        </div>
+                        <div class="bg-white p-6 text-center card-hover reveal">
+                            <div class="w-32 h-32 mx-auto bg-gray-200 rounded-full mb-6 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-xl font-bold text-navy">Arun Singh Bamar</h3>
+                            <p class="text-saffron font-bold text-sm tracking-widest uppercase mt-2">General Secretary
+                            </p>
+                        </div>
+                        <div class="bg-white p-6 text-center card-hover reveal">
+                            <div class="w-32 h-32 mx-auto bg-gray-200 rounded-full mb-6 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80"
+                                    class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-xl font-bold text-navy">Naveen Satyavarapu</h3>
+                            <p class="text-saffron font-bold text-sm tracking-widest uppercase mt-2">Treasurer</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- VOLUNTEER VIEW -->
+        <div id="view-volunteer" class="view-section">
+            <div class="bg-saffron py-24 text-center text-white">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 reveal active">Become A Spoke</h1>
+                <p class="text-xl font-light opacity-90 reveal active delay-100">Join the syndicate. Make a tangible
+                    difference.</p>
+            </div>
+
+            <section class="max-w-4xl mx-auto px-4 py-24">
+                <div class="bg-white p-8 md:p-12 shadow-2xl reveal border-t-8 border-navy">
+                    <h2 class="text-3xl font-bold text-navy mb-8 text-center">Registration Form</h2>
+
+                    <form
+                        onsubmit="event.preventDefault(); alert('Thank you for your interest! We will contact you soon.');"
+                        class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label
+                                    class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Full
+                                    Name</label>
+                                <input type="text" required
+                                    class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                    placeholder="YOUR NAME">
+                            </div>
+                            <div>
+                                <label
+                                    class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Phone</label>
+                                <input type="tel" required
+                                    class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                    placeholder="+91 XXXXX XXXXX">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Email</label>
+                            <input type="email" required
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="EMAIL ADDRESS">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Area
+                                of Interest</label>
+                            <select
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all">
+                                <option>Education Support</option>
+                                <option>Health & Nutrition</option>
+                                <option>Women's Empowerment</option>
+                                <option>Environment</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Why
+                                Join Us?</label>
+                            <textarea rows="4"
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="YOUR STORY..."></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-navy text-white font-header font-bold text-xl py-5 uppercase tracking-wider hover:bg-saffron transition-colors shadow-lg mt-4">
+                            Submit Application
+                        </button>
+                    </form>
+
+                    <div class="mt-12 text-center border-t pt-8">
+                        <p class="font-bold text-navy mb-2">QUESTIONS?</p>
+                        <a href="mailto:24spokesorganisation@gmail.com"
+                            class="text-saffron font-bold text-lg hover:underline">24spokesorganisation@gmail.com</a>
+                        <p class="text-gray-500 mt-2">+91 6300115500 / +91 8367768701</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LOGIN VIEW -->
+        <div id="view-login" class="view-section">
+            <div class="bg-navy py-16 text-center text-white">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 reveal active">Member Access</h1>
+                <p class="text-lg font-light opacity-90 reveal active delay-100">Login to your account</p>
+            </div>
+
+            <section class="max-w-md mx-auto px-4 py-16">
+                <div class="bg-white p-8 shadow-2xl reveal border-t-8 border-saffron">
+                    <div class="flex justify-center mb-8">
+                        <button id="loginTab" onclick="showLoginForm()"
+                            class="px-8 py-3 font-header font-bold text-navy border-b-4 border-saffron uppercase tracking-wide">Login</button>
+                        <button id="registerTab" onclick="showRegisterForm()"
+                            class="px-8 py-3 font-header font-bold text-gray-400 uppercase tracking-wide">Register</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="loginForm"
+                        onsubmit="event.preventDefault(); alert('Login functionality will be available soon!');"
+                        class="space-y-6">
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Email</label>
+                            <input type="email" required
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="YOUR EMAIL">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Password</label>
+                            <input type="password" required
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="PASSWORD">
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-navy text-white font-header font-bold text-lg py-4 uppercase tracking-wider hover:bg-saffron transition-colors shadow-lg">
+                            Login
+                        </button>
+
+                        <p class="text-center text-sm text-gray-500 mt-4">
+                            Forgot password? <a href="#" class="text-saffron hover:underline">Reset here</a>
+                        </p>
+                    </form>
+
+                    <!-- Register Form -->
+                    <form id="registerForm" style="display:none;"
+                        onsubmit="event.preventDefault(); alert('Registration functionality will be available soon!');"
+                        class="space-y-6">
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Full
+                                Name</label>
+                            <input type="text" required
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="YOUR NAME">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Email</label>
+                            <input type="email" required
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="YOUR EMAIL">
+                        </div>
+
+                        <div>
+                            <label
+                                class="block font-header font-bold text-navy mb-2 uppercase text-sm tracking-wide">Password</label>
+                            <input type="password" required
+                                class="w-full p-4 bg-lightGray border-none focus:ring-2 focus:ring-saffron transition-all"
+                                placeholder="PASSWORD">
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-saffron text-white font-header font-bold text-lg py-4 uppercase tracking-wider hover:bg-navy transition-colors shadow-lg">
+                            Create Account
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy text-white py-16 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <i class="fas fa-dharmachakra text-5xl text-saffron mb-6"></i>
+            <h2 class="text-2xl font-bold font-header tracking-widest mb-8">24 SPOKES ORGANIZATION</h2>
+
+            <div class="flex justify-center space-x-6 mb-12">
+                <a href="#"
+                    class="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-saffron hover:border-saffron transition-all">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#"
+                    class="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-saffron hover:border-saffron transition-all">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#"
+                    class="w-10 h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-saffron hover:border-saffron transition-all">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+
+            <p class="text-sm text-gray-400 font-light">
+                &copy; 2025 24 Spokes Organisation. All rights reserved. <br>
+                Registered under Andhra Pradesh Co-operative Societies Act-2002.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Page switching
+        function switchPage(pageId) {
+            window.scrollTo(0, 0);
+
+            const sections = document.querySelectorAll('.view-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            const selected = document.getElementById(`view-${pageId}`);
+            if (selected) {
+                selected.classList.add('active');
+                setTimeout(reveal, 100);
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+
+        // Login/Register form toggle
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginTab').classList.add('border-b-4', 'border-saffron', 'text-navy');
+            document.getElementById('loginTab').classList.remove('text-gray-400');
+            document.getElementById('registerTab').classList.remove('border-b-4', 'border-saffron', 'text-navy');
+            document.getElementById('registerTab').classList.add('text-gray-400');
+        }
+
+        function showRegisterForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('registerTab').classList.add('border-b-4', 'border-saffron', 'text-navy');
+            document.getElementById('registerTab').classList.remove('text-gray-400');
+            document.getElementById('loginTab').classList.remove('border-b-4', 'border-saffron', 'text-navy');
+            document.getElementById('loginTab').classList.add('text-gray-400');
+        }
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+
+</html>
